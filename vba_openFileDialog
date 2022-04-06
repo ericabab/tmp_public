@@ -1,0 +1,30 @@
+Sub openFileDialog()
+    Dim fd As Office.FileDialog
+    Dim strFile As String
+     
+    Set fd = Application.FileDialog(msoFileDialogFilePicker)
+     
+    With fd
+     
+        .Filters.Clear
+        .Filters.Add "Excel Files", "*.xls*", 1
+        .Title = "Choose an Excel file"
+        .AllowMultiSelect = False
+        
+        '設定預設資料夾，讓它跟執行VBA的檔案一樣路徑
+        .InitialFileName = Application.ThisWorkbook.Path
+     
+        If .Show = True Then
+            strFile = .SelectedItems(1)
+            MsgBox ("檔案是: " & strFile)
+        Else
+            MsgBox ("No file selected, quit")
+            Exit Sub
+        End If
+     
+    End With
+            
+    '把要開啟檔案的檔名換成 strFile
+    '其他code都不變
+
+End Sub
